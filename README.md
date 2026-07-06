@@ -1,8 +1,7 @@
 <a id="readme-top"></a>
 
 <div align="center">
-
-<h1 style="font-size: 7rem; font-weight: 900;">Learning</h1>
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=900&size=70&pause=1000&color=FFFFFF&center=true&vCenter=true&width=600&height=100&lines=Learning" alt="Learning">
 
 <p><strong>«Программист — это не тот, кто знает всё. Это тот, кто умеет искать ответы, когда всё идёт не так.»</strong></p>
 
