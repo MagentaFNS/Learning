@@ -2,8 +2,7 @@
 
 <div align="center">
 
-
-<h1>Learning</h1>
+<h1 style="font-size: 7rem; font-weight: 900;">Learning</h1>
 
 <p><strong>«Программист — это не тот, кто знает всё. Это тот, кто умеет искать ответы, когда всё идёт не так.»</strong></p>
 
