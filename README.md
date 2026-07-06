@@ -4,7 +4,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/icons/Новый проект.svg">
-  <img alt="Lore — open source version control by Epic Games" src="docs/icons/logo.png" width="900">
+  <img alt="Learning — open source for coding" src="docs/icons/logo.png" width="900">
 </picture>
 
 <h1>Learning</h1>
