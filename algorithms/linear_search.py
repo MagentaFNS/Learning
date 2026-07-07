@@ -2,7 +2,7 @@ def linear_search(list,item): #функция линейного поиска
     for i in range(len(list)): #перебираем длину для получения индексов
         if list[i] == item: #находим подходящий элемент
             return i
-        return None
+    return None
 
 
 #Примеры из реальной жизни:
