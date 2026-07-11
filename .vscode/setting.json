@@ -1,0 +1,17 @@
+{
+    "python.analysis.exclude": [
+        "basics",
+        "algorithms",
+        "scraps",
+        "django"
+    ],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": false,
+    "python.analysis.indexing": false,
+    "files.watcherExclude": {
+        "**/algorithms/**": true,
+        "**/basics/**": true,
+        "**/scraps/**": true,
+        "**/django/**": true
+    }
+}
