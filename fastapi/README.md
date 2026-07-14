@@ -34,3 +34,11 @@ PowerShell:
 venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 deactivate
+```
+---
+### Запуск
+```bash
+cd ~/Dev/projects/Learning/fastapi/project_practic/src
+source ../../venv/bin/activate
+python main.py
+```
