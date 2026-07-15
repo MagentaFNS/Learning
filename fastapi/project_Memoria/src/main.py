@@ -1,9 +1,16 @@
-from fastapi import FastAPI,HTTPException,APIRouter
+from fastapi import FastAPI,HTTPException,Depends
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
+import sys
+import os
 import uvicorn
 
-class items(BaseModel):
-    name:str
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+
+from database.bd import SessionLocal,engine
+from database.models import ItemDB, Base
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Memoria Core API",
@@ -11,31 +18,51 @@ app = FastAPI(
     version="1.0.0"
 )
 
-tasks = []
+class ItemsCreate(BaseModel):
+    name:str
 
+class ItemResponse(BaseModel):
+    id:int
+    name:str
 
-@app.get("/",tags=["Tasks"])
-def task():
-    return {"message":tasks}
+def get_bd():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
-@app.post("/append_task",tags=["Tasks"])
-def append_task(item:items):
-    tasks.append(item.name)
-    return {"message":f"Задача добавлена: {item.name}"}
+@app.get("/",response_model=list[ItemResponse],tags=["Tasks"])
+def task(db: Session = Depends(get_bd)):
+    items = db.query(ItemDB).all()
+    return items
 
-@app.put("/put_task",tags=["Tasks"])
-def put_task(item_id:int,new_item:items):
-    if item_id not in tasks:
-        raise HTTPException(status_code=404,detail=f"Индекс {item_id} не был найден.")
-    tasks[item_id] = new_item.name
-    return {"message":f"Задача индекса: {item_id}, обновленна на {new_item}"}
+@app.post("/append_task",response_model=ItemResponse,tags=["Tasks"])
+def append_task(item:ItemsCreate,db: Session = Depends(get_bd)):
+    item_db = ItemDB(name = item.name)
+    db.add(item_db)
+    db.commit()
+    db.refresh(item_db)
+    return item_db
+
+@app.put("/put_task",response_model=ItemResponse,tags=["Tasks"])
+def put_task(item_id:int,new_item:ItemsCreate,db: Session = Depends(get_bd)):
+    db_item = db.query(ItemDB).filter(ItemDB.id == item_id).first()
+    if db_item is None:
+        raise HTTPException(status_code=404,detail='Items not found')
+    db_item.name = new_item.name
+    db.commit()
+    db.refresh(db_item)
+    return db_item
 
 @app.delete("/delete_task",tags=["Tasks"])
-def delete_task(item_id:int):
-    if item_id not in tasks:
+def delete_task(item_id:int,db: Session = Depends(get_bd)):
+    db_item = db.query(ItemDB).filter(ItemDB.id == item_id).first()
+    if db_item is None:
         raise HTTPException(status_code=404,detail=f"Индекс {item_id} не был найден.")
-    tasks.pop(item_id)
-    return {"message":f"Задача индекса: {item_id},была удалена"}
+    db.delete(db_item)
+    db.commit()
+    return {"message":f"Item с id {item_id} удалён"}
 
 if __name__ == "__main__":
     uvicorn.run("main:app",host="127.0.0.1", port=8000,reload = True)
