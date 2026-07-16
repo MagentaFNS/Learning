@@ -1,11 +1,21 @@
 #Изучение Валидаторов,регистрация пользователя.
-from fastapi import FastAPI
+from fastapi import FastAPI,Depends,HTTPException
 from pydantic import BaseModel,Field,field_validator
+from sqlalchemy.orm import Session
+import os
+import sys
 import uvicorn
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+
+from database.bd import SessionLocal,engine
+from database.models import ItemDB,Base
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Verification",
-    version="1.0.0"
+    version="1.0.0.0"
 )
 
 class User(BaseModel):
