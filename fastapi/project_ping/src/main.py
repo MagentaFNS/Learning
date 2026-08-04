@@ -11,9 +11,9 @@ class ItemBase(BaseModel):
     name:str
 
 class ItemCreate(ItemBase):
-    name:str
+    pass
 
-class ItemResponce(ItemBase):
+class ItemResponse(ItemBase):
     id:int
     name:str
 
@@ -31,9 +31,9 @@ def welcome(name:str):
 
 @app.get("/items",tags=['Items'])
 def items_bd():
-    if items == []:
+    if not items:
         raise HTTPException(status_code=404,detail="Bd is Empty")
-    return items
+    return [{"id": idx, **item} for idx, item in enumerate(items)]
 
 @app.post("/items",tags=['Items'])
 def get_items(item:ItemCreate):
@@ -42,17 +42,17 @@ def get_items(item:ItemCreate):
 
 @app.put("/items/{item_id}",tags=['Items'])
 def update_items(item_id:int,new_name:ItemCreate):
-    if item_id < 0 or item_id > len(items):
-            raise HTTPException(status_code=404,detail='User not found')
+    if item_id < 0 or item_id >= len(items):
+            raise HTTPException(status_code=404,detail='Item not found')
     items[item_id] = new_name.model_dump()
     return {"message":f"Item has been replaced"}
 
 @app.delete("/items/{item_id}",tags=['Items'])
 def delete_items(item_id:int):
-    if item_id < 0 or item_id > len(items):
-        raise HTTPException(status_code=404,detail='User not found')
+    if item_id < 0 or item_id >= len(items):
+        raise HTTPException(status_code=404,detail='Item not found')
     item_pop = items.pop(item_id)
-    return {"messge":f"Item {item_pop} was delete."}
+    return {"message":f"Item {item_pop} was delete."}
 
 if __name__ == "__main__":
     uvicorn.run("main:app",host='127.0.0.1',port=8000, reload=True)
