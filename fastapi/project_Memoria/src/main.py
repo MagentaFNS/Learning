@@ -7,7 +7,7 @@ import uvicorn
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
 
-from database.bd import SessionLocal,engine
+from database.database import SessionLocal,engine
 from database.models import ItemDB, Base
 
 Base.metadata.create_all(bind=engine)
