@@ -5,10 +5,10 @@ import sys
 import os
 import uvicorn
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))))
 
-from database.database import SessionLocal, engine
-from database.models import Base, ItemDB
+from Python.database.database import SessionLocal, engine
+from Python.database.models import Base, ItemDB
 
 Base.metadata.create_all(bind=engine)
 

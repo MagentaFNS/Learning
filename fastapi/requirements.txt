@@ -1,5 +1,0 @@
-FastAPI
-Uvicorn
-psycopg2-binary
-sqlalchemy
-python-dotenv
