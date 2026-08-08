@@ -10,8 +10,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(
 from Python.database.database import SessionLocal,engine
 from Python.database.models import Base,ItemDB
 
-Base.metadata.create_all(bind=engine)
-
 app = FastAPI(
     title="Welcome to backend",
     version="0.0.1"

@@ -27,8 +27,6 @@ from auth import (
     get_db
 )
 
-# Создаем таблицы в БД
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Verification with Project",

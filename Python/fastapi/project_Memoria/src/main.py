@@ -10,8 +10,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(
 from Python.database.database import SessionLocal,engine
 from Python.database.models import ItemDB, Base
 
-Base.metadata.create_all(bind=engine)
-
 app = FastAPI(
     title="Memoria Core API",
     description="Безопасное ядро для хранения и управления текстовыми сущностями. Memoria Core обеспечивает высокоскоростной доступ к данным, поддерживая полнотекстовый поиск, версионирование и гибкую систему тегов. Ваша цифровая память, защищенная на уровне базы данных.",

@@ -10,8 +10,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(
 from Python.database.database import SessionLocal, engine
 from Python.database.models import Base, ItemDB
 
-Base.metadata.create_all(bind=engine)
-
 app = FastAPI()
 
 class ItemsCreate(BaseModel):
