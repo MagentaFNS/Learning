@@ -7,8 +7,8 @@ import uvicorn
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))))
 
-from Python.database.database import SessionLocal,engine
-from Python.database.models import ItemDB, Base
+from Python.database.database import SessionLocal
+from Python.database.models import ItemDB
 
 app = FastAPI(
     title="Memoria Core API",
@@ -60,7 +60,7 @@ def delete_task(item_id:int,db: Session = Depends(get_bd)):
         raise HTTPException(status_code=404,detail=f"Индекс {item_id} не был найден.")
     db.delete(db_item)
     db.commit()
-    return {"message":f"Item с id {item_id} удалён"}
+    return {"message":f"Item c id {item_id} удалён"}
 
 if __name__ == "__main__":
     uvicorn.run("main:app",host="127.0.0.1", port=8000,reload = True)
