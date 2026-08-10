@@ -6,3 +6,10 @@ import string
 alphabet = string.ascii_letters + string.digits
 safe_key = ''.join(secrets.choice(alphabet) for _ in range(64))
 print(safe_key)
+
+#Hello world
+def HelloWorld(name):
+    if name == "print":
+        print("Hello World!")
+
+HelloWorld("print")
