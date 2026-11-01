@@ -20,8 +20,8 @@ load_dotenv()
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Импортируем ваш Base и модели
-from Python.database.database import Base
-from Python.database import models  # Важно: загружаем модели, чтобы Alembic их "увидел"
+from project.database.database import Base
+from project.database import models  # Важно: загружаем модели, чтобы Alembic их "увидел"
 # ========================================================
 
 # this is the Alembic Config object, which provides

@@ -2,14 +2,15 @@ from fastapi import FastAPI,HTTPException,Depends
 from fastapi.testclient import TestClient
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
-import os
+from pathlib import Path
 import sys
 import uvicorn
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))))
+BASE_DIR = Path(__file__).resolve().parents[4]
+sys.path.append(str(BASE_DIR))
 
-from Python.database.database import SessionLocal
-from Python.database.models import ItemDB
+from project.database.database import SessionLocal
+from project.database.models import ItemDB
 
 app = FastAPI(
     title="Project Riddles API",

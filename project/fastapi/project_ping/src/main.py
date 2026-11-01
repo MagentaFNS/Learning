@@ -1,14 +1,15 @@
 from fastapi import FastAPI,HTTPException,Depends
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
-import os
 import sys
+from pathlib import Path
 import uvicorn
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))))
+BASE_DIR = Path(__file__).resolve().parents[4]
+sys.path.append(str(BASE_DIR))
 
-from Python.database.database import SessionLocal,engine
-from Python.database.models import Base,ItemDB
+from project.database.database import SessionLocal,engine
+from project.database.models import Base,ItemDB
 
 app = FastAPI(
     title="Welcome to backend",

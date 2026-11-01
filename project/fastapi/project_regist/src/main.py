@@ -5,20 +5,20 @@ from pydantic import BaseModel, field_validator
 from sqlalchemy.orm import Session
 from datetime import timedelta
 import sys
-import os
+from pathlib import Path
 import uvicorn
 from dotenv import load_dotenv
 
 # Загружаем переменные окружения
 load_dotenv()
 
-# Добавляем путь к корневой папке
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+BASE_DIR =Path(__file__).resolve().parents[4]
+sys.path.append(str(BASE_DIR))
 
 # Импорты из ваших файлов
-from database.database import engine, SessionLocal
-from database.models import Base, UserDB
-from auth import (
+from project.database.database import engine, SessionLocal
+from project.database.models import Base, UserDB
+from project.fastapi.project_regist.src.auth import (
     get_current_user,
     get_password_hash,
     authenticate_user,

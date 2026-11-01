@@ -11,9 +11,9 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-from database.database import SessionLocal
-from database.models import UserDB
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))))
+from project.database.database import SessionLocal
+from project.database.models import UserDB
 
 SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 if not SECRET_KEY:
